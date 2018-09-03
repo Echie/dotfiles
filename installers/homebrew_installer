@@ -1,13 +1,18 @@
 #!/System/Library/Frameworks/Ruby.framework/Versions/Current/usr/bin/ruby
-# This script installs to /usr/local only. To install elsewhere you can just
-# untar https://github.com/Homebrew/brew/tarball/master anywhere you like or
-# change the value of HOMEBREW_PREFIX.
+# This script installs to /usr/local only. To install elsewhere (which is
+# unsupported) you can untar https://github.com/Homebrew/brew/tarball/master
+# anywhere you like.
 HOMEBREW_PREFIX = "/usr/local".freeze
 HOMEBREW_REPOSITORY = "/usr/local/Homebrew".freeze
 HOMEBREW_CACHE = "#{ENV["HOME"]}/Library/Caches/Homebrew".freeze
 HOMEBREW_OLD_CACHE = "/Library/Caches/Homebrew".freeze
 BREW_REPO = "https://github.com/Homebrew/brew".freeze
 CORE_TAP_REPO = "https://github.com/Homebrew/homebrew-core".freeze
+
+# TODO: bump version when new macOS is released
+MACOS_LATEST_SUPPORTED = "10.13".freeze
+# TODO: bump version when new macOS is released
+MACOS_OLDEST_SUPPORTED = "10.11".freeze
 
 # no analytics during installation
 ENV["HOMEBREW_NO_ANALYTICS_THIS_RUN"] = "1"
@@ -110,8 +115,12 @@ end
 def should_install_command_line_tools?
   return false if force_curl?
   return false if macos_version < "10.9"
-  developer_dir = `/usr/bin/xcode-select -print-path 2>/dev/null`.chomp
-  developer_dir.empty? || !File.exist?("#{developer_dir}/usr/bin/git")
+  if macos_version > "10.13"
+    !File.exist?("/Library/Developer/CommandLineTools/usr/bin/git")
+  else
+    !File.exist?("/Library/Developer/CommandLineTools/usr/bin/git") ||
+      !File.exist?("/usr/include/iconv.h")
+  end
 end
 
 def git
@@ -181,6 +190,32 @@ installer again:
     sudo chmod 775 #{HOMEBREW_PREFIX}
 EOABORT
 
+# TODO: bump version when new macOS is released
+if macos_version > MACOS_LATEST_SUPPORTED ||
+   macos_version < MACOS_OLDEST_SUPPORTED
+
+  who = "We"
+  if macos_version > MACOS_LATEST_SUPPORTED
+    what = "pre-release version"
+  elsif macos_version < MACOS_OLDEST_SUPPORTED
+    who << " (and Apple)"
+    what = "old version"
+  else
+    return
+  end
+  ohai "You are using macOS #{macos_version.parts.join(".")}."
+  ohai "#{who} do not provide support for this #{what}."
+
+  puts <<-EOS
+This installation may not succeed.
+After installation, you will encounter build failures and other breakages.
+Please create pull-requests instead of asking for help on Homebrew's
+GitHub, Discourse, Twitter or IRC. As you are running this #{what},
+you are responsible for resolving any issues you experience.
+
+  EOS
+end
+
 ohai "This script will install:"
 puts "#{HOMEBREW_PREFIX}/bin/brew"
 puts "#{HOMEBREW_PREFIX}/share/doc/homebrew"
@@ -231,6 +266,8 @@ if should_install_command_line_tools?
   ohai "The Xcode Command Line Tools will be installed."
 end
 
+wait_for_user if STDIN.tty? && !ENV["TRAVIS"]
+
 if File.directory? HOMEBREW_PREFIX
   sudo "/bin/chmod", "u+rwx", *chmods unless chmods.empty?
   sudo "/bin/chmod", "g+rwx", *group_chmods unless group_chmods.empty?
@@ -262,7 +299,7 @@ if should_install_command_line_tools?
   # This temporary file prompts the 'softwareupdate' utility to list the Command Line Tools
   clt_placeholder = "/tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress"
   sudo "/usr/bin/touch", clt_placeholder
-  clt_label = `softwareupdate -l | grep -B 1 -E "Command Line (Developer|Tools)" | awk -F"*" '/^ +\\*/ {print $2}' | sed 's/^ *//' | tail -n1`.chomp
+  clt_label = `/usr/sbin/softwareupdate -l | grep -B 1 -E "Command Line (Developer|Tools)" | awk -F"*" '/^ +\\*/ {print $2}' | sed 's/^ *//' | tail -n1`.chomp
   ohai "Installing #{clt_label}"
   sudo "/usr/sbin/softwareupdate", "-i", clt_label
   sudo "/bin/rm", "-f", clt_placeholder
@@ -333,16 +370,22 @@ puts
 print "\a"
 
 # Use an extra newline and bold to avoid this being missed.
-ohai "Homebrew has enabled anonymous aggregate user behaviour analytics."
+ohai "Homebrew has enabled anonymous aggregate formulae and cask analytics."
 puts <<-EOS
 #{Tty.bold}Read the analytics documentation (and how to opt-out) here:
   #{Tty.underline}https://docs.brew.sh/Analytics.html#{Tty.reset}
 
 EOS
 
+ohai "Homebrew is run entirely by unpaid volunteers. Please consider donating:"
+puts <<-EOS
+  #{Tty.underline}https://github.com/Homebrew/brew#donations#{Tty.reset}
+EOS
+
 if git
   Dir.chdir HOMEBREW_REPOSITORY do
     system git, "config", "--local", "--replace-all", "homebrew.analyticsmessage", "true"
+    system git, "config", "--local", "--replace-all", "homebrew.caskanalyticsmessage", "true"
   end
 end
 

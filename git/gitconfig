@@ -1,0 +1,11 @@
+# This is Git's per-user configuration file.
+[user]
+	name = Teemu Huovinen
+	email = teemu.huovinen@hotmail.fi
+[push]
+	default = simple
+
+[core]
+	editor = nano
+	autocrlf = input
+	excludesfile =  ~/.gitignore_global

@@ -1,0 +1,30 @@
+# Common
+*~
+.DS_Store
+
+# Sublime
+*.sublime-project
+*.sublime-workspace
+.phpintel/*
+
+# VS Code
+.vscode
+
+# C/C++
+*.o
+
+# env-file
+.env
+
+# virtualenv dirs
+venv
+
+# Logging and temporary files
+logs
+tmp
+
+
+# Python-related files
+*.ipynb
+*.pyc
+.ipynb_checkpoints

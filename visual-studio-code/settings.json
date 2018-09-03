@@ -1,0 +1,62 @@
+{
+  // Terminal
+  "terminal.external.osxExec": "iTerm.app",
+  "terminal.integrated.cursorStyle": "line",
+  "terminal.integrated.shell.osx": "/bin/zsh",
+  "docker.attachShellCommand.linuxContainer": "/bin/bash",
+
+  // Theme and icons
+  "workbench.colorTheme": "One Dark Pro",
+  "workbench.iconTheme": "vscode-icons",
+  "workbench.colorCustomizations": {
+    "editorIndentGuide.activeBackground": "#646363"
+  },
+
+  // Git
+  "git.autofetch": true,
+  "gitlens.codeLens.enabled": false,
+  "gitlens.currentLine.enabled": false,
+  "gitlens.historyExplorer.enabled": true,
+  "gitlens.advanced.messages": {
+    "suppressShowKeyBindingsNotice": true
+  },
+
+  // Python
+  "python.pythonPath": "/usr/local/bin/python3",
+  "python.formatting.provider": "yapf",
+  "python.venvFolders": ["venv"],
+  "python.venvPath": "${workspaceRoot}",
+  // "python.autoComplete.preloadModules": ["numpy", "pandas", "psycopg2"],
+  // "python.linting.pylintArgs": [
+  //   "--disable=R,C,W0702,W0703",
+  //   "--load-plugins=pylint_django"
+  // ],
+  // "python.autoComplete.extraPaths": [
+  //     "${workspaceRoot}/venv/lib/python3.6/site-packages"
+  // ],
+
+  // Miscellaneous
+  "atomKeymap.promptV3Features": true,
+  "explorer.confirmDragAndDrop": false,
+  "breadcrumbs.enabled": true,
+  "search.smartCase": true,
+  "problems.decorations.enabled": false,
+  "code-runner.saveFileBeforeRun": true,
+  "code-runner.ignoreSelection": true,
+
+  "editor.scrollBeyondLastLine": false,
+  "editor.multiCursorModifier": "ctrlCmd",
+  "editor.formatOnSave": true,
+
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "node_modules": true,
+    ".ipynb_checkpoints": true
+  }
+}
