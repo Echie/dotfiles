@@ -232,13 +232,6 @@ function configure_iterm2() {
         error "iTerm2 configuration failed."
         exit 1
     fi
-    substep "Opening iTerm2"
-    if osascript -e 'tell application "iTerm" to activate'; then
-        substep "iTerm2 activation successful"
-    else
-        error "Failed to activate iTerm2"
-        exit 1
-    fi
 }
 
 function update_hosts_file() {
