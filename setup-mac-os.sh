@@ -207,7 +207,8 @@ function install_scm_breeze() {
 
 function configure_spectacle() {
     info "Configuring up spectacle..."
-    if cp ${DOTFILES_REPO}/spectacle/Shortcuts.json ~/Library/Application\ Support/Spectacle/Shortcuts.json; then
+    if mkdir ~/Library/Application\ Support/Spectacle && \
+    cp ${DOTFILES_REPO}/spectacle/Shortcuts.json ~/Library/Application\ Support/Spectacle/Shortcuts.json; then
         success "Spectacle successfully configured."
     else
         error "Spectacle configuration failed"
