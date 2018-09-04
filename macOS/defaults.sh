@@ -6,7 +6,7 @@ main() {
     configure_chrome
     configure_system
     # to ensure the focus gets back to the terminal after the execution completes
-    move_focus_back_to_iterm2
+    # move_focus_back_to_iterm2
 }
 
 function configure_finder() {
