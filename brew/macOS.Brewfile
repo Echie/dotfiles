@@ -18,8 +18,8 @@ brew "wget"
 cask "docker"
 cask "dropbox"
 cask "google-chrome"
-# can be removed if media keys started working like they should again
-cask "highsierramediakeyenabler"
+# add if media keys are bugged
+# cask "highsierramediakeyenabler"
 cask "iterm2"
 cask "nordvpn"
 cask "postman"
