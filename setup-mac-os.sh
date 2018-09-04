@@ -16,12 +16,12 @@ main() {
     clone_dotfiles_repo
     # Installing all packages in Dotfiles repository's Brewfile
     install_packages_with_brewfile
-    # Install oh-my-zsh
-    install_oh_my_zsh
     # Configure oh-my-zsh
     configure_oh_my_zsh
     # Make sure zsh is the default shell
     change_shell_to_zsh
+    # Install oh-my-zsh
+    install_oh_my_zsh
     # Configuring git config files
     configure_git
     # Install scm breeze
@@ -126,32 +126,12 @@ function install_packages_with_brewfile() {
     fi
 }
 
-function install_oh_my_zsh() {
-    info "Installing Oh My Zsh..."
-    if test -d ~/.oh-my-zsh; then
-        success "Oh my Zsh already exists."
-    else
-        url=https://raw.githubusercontent.com/echie/dotfiles/master/installers/oh_my_zsh_installer
-        if sh -c "$(curl -fsSL ${url})"; then
-            success "Oh My Zsh installation succeeded."
-        else
-            error "Oh My Zsh installation failed."
-            exit 1
-        fi
-    fi
-}
-
 function configure_oh_my_zsh() {
     info "Configuring Oh My Zsh..."
-
-    if test ! -d ~/.oh-my-zsh; then
-        error "Oh my Zsh not installed, skipping configuration"
+    if cp ${DOTFILES_REPO}/zsh/.zshrc ~/.zshrc; then
+        success "Oh my Zsh successfully configured."
     else
-        if cp ${DOTFILES_REPO}/zsh/.zshrc ~/.zshrc; then
-            success "Oh my Zsh successfully configured."
-        else
-            error "Oh my Zsh configuration failed."
-        fi
+        error "Oh my Zsh configuration failed."
     fi
 }
 
@@ -179,6 +159,21 @@ function change_shell_to_zsh() {
             success "Zsh shell successfully set for \"${user}\""
         else
             error "Please try setting the Zsh shell again."
+        fi
+    fi
+}
+
+function install_oh_my_zsh() {
+    info "Installing Oh My Zsh..."
+    if test -d ~/.oh-my-zsh; then
+        success "Oh my Zsh already exists."
+    else
+        url=https://raw.githubusercontent.com/echie/dotfiles/master/installers/oh_my_zsh_installer
+        if sh -c "$(curl -fsSL ${url})"; then
+            success "Oh My Zsh installation succeeded."
+        else
+            error "Oh My Zsh installation failed."
+            exit 1
         fi
     fi
 }
