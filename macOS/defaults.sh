@@ -82,6 +82,9 @@ function configure_system() {
     # Disable Gatekeeper entirely to get rid of \
     # “Are you sure you want to open this application?” dialog
     sudo spctl --master-disable
+
+    # Do not use natural scrolling direction
+    defaults write -g com.apple.swipescrolldirection -bool false
 }
 
 function quit() {
