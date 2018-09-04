@@ -286,7 +286,7 @@ function login_item() {
     hidden=${2:-false}
     name=$(basename "$path")
 
-    # "¬" charachter tells osascript that the line continues
+    # "¬" character tells osascript that the line continues
     if osascript &> /dev/null << EOM
 tell application "System Events" to make login item with properties ¬
 {name: "$name", path: "$path", hidden: "$hidden"}
