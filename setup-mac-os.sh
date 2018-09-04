@@ -23,7 +23,7 @@ main() {
     # Configuring git config files
     configure_git
     # Install scm breeze
-    configure_scm_breeze
+    install_scm_breeze
     # Configure spectacle
     configure_spectacle
     # Install global python packages
@@ -180,14 +180,17 @@ function configure_git() {
     fi
 }
 
-function configure_scm_breeze() {
-    info "Configuring scm_breeze..."
-    if git clone git://github.com/scmbreeze/scm_breeze.git ~/.scm_breeze && \
-       ~/.scm_breeze/install.sh && \
-       source ~/.zshrc; then
-        success "Scm breeze configuration succeeded."
+function install_scm_breeze() {
+    info "Installing scm_breeze..."
+    if test -e ~/.scm_breeze; then
+        success "Scm breeze already installed"
     else
-        error "Scm breeze configuration failed."
+    if git clone git://github.com/scmbreeze/scm_breeze.git ~/.scm_breeze && \
+        ~/.scm_breeze/install.sh; then
+            success "Scm breeze installation succeeded."
+    else
+            error "Scm breeze installation failed."
+        fi
     fi
 }
 
