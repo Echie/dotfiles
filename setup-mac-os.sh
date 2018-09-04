@@ -126,8 +126,8 @@ function install_packages_with_brewfile() {
 
 function install_oh_my_zsh() {
     info "Installing Oh My Zsh..."
-    if hash brew 2>/dev/null; then
-        success "Homebrew already exists."
+    if test -d ~/.oh-my-zsh; then
+        success "Oh my Zsh already exists."
     else
         url=https://raw.githubusercontent.com/echie/dotfiles/master/installers/oh_my_zsh_installer
         if sh -c "$(curl -fsSL ${url})"; then
