@@ -18,6 +18,8 @@ main() {
     install_packages_with_brewfile
     # Install oh-my-zsh
     install_oh_my_zsh
+    # Configure oh-my-zsh
+    configure_oh_my_zsh
     # Make sure zsh is the default shell
     change_shell_to_zsh
     # Configuring git config files
@@ -139,6 +141,20 @@ function install_oh_my_zsh() {
     fi
 }
 
+function configure_oh_my_zsh() {
+    info "Configuring Oh My Zsh..."
+
+    if test ! -d ~/.oh-my-zsh; then
+        error "Oh my Zsh not installed, skipping configuration"
+    else
+        if cp ${DOTFILES_REPO}/zsh/.zshrc ~/.zshrc; then
+            success "Oh my Zsh successfully configured."
+        else
+            error "Oh my Zsh configuration failed."
+        fi
+    fi
+}
+
 function change_shell_to_zsh() {
     info "Zsh shell setup..."
     if grep --quiet zsh <<< "$SHELL"; then
@@ -185,10 +201,10 @@ function install_scm_breeze() {
     if test -e ~/.scm_breeze; then
         success "Scm breeze already installed"
     else
-    if git clone git://github.com/scmbreeze/scm_breeze.git ~/.scm_breeze && \
+        if git clone git://github.com/scmbreeze/scm_breeze.git ~/.scm_breeze && \
         ~/.scm_breeze/install.sh; then
             success "Scm breeze installation succeeded."
-    else
+        else
             error "Scm breeze installation failed."
         fi
     fi
