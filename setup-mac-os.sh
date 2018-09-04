@@ -173,7 +173,7 @@ function configure_git() {
 
     info "Configuring git..."
     if cp ${DOTFILES_REPO}/git/.gitignore_global ~/.gitignore_global && \
-    cp ${DOTFILES_REPO}/git/gitconfig ~/gitconfig; then
+    cp ${DOTFILES_REPO}/git/gitconfig ~/.gitconfig; then
         success "Git configuration succeeded."
     else
         error "Git configuration failed."
