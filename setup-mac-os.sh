@@ -16,8 +16,6 @@ main() {
     clone_dotfiles_repo
     # Installing all packages in Dotfiles repository's Brewfile
     install_packages_with_brewfile
-    # Configure oh-my-zsh
-    configure_oh_my_zsh
     # Make sure zsh is the default shell
     change_shell_to_zsh
     # Install oh-my-zsh
@@ -126,15 +124,6 @@ function install_packages_with_brewfile() {
     fi
 }
 
-function configure_oh_my_zsh() {
-    info "Configuring Oh My Zsh..."
-    if cp ${DOTFILES_REPO}/zsh/.zshrc ~/.zshrc; then
-        success "Oh my Zsh successfully configured."
-    else
-        error "Oh my Zsh configuration failed."
-    fi
-}
-
 function change_shell_to_zsh() {
     info "Zsh shell setup..."
     if grep --quiet zsh <<< "$SHELL"; then
@@ -168,9 +157,13 @@ function install_oh_my_zsh() {
     if test -d ~/.oh-my-zsh; then
         success "Oh my Zsh already exists."
     else
-        url=https://raw.githubusercontent.com/echie/dotfiles/master/installers/oh_my_zsh_installer
-        if sh -c "$(curl -fsSL ${url})"; then
-            success "Oh My Zsh installation succeeded."
+        if git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh; then
+            success "Oh My Zsh installation succeeded, using configuration from the repository."
+            if cp ${DOTFILES_REPO}/zsh/.zshrc ~/.zshrc; then
+                success "Oh my Zsh successfully configured."
+            else
+                error "Oh my Zsh configuration failed."
+            fi
         else
             error "Oh My Zsh installation failed."
             exit 1
@@ -193,7 +186,7 @@ function configure_git() {
 
 function install_scm_breeze() {
     info "Installing scm_breeze..."
-    if test -e ~/.scm_breeze; then
+    if test -d ~/.scm_breeze; then
         success "Scm breeze already installed"
     else
         if git clone git://github.com/scmbreeze/scm_breeze.git ~/.scm_breeze && \
