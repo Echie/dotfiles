@@ -43,10 +43,14 @@
   "problems.decorations.enabled": false,
   "code-runner.saveFileBeforeRun": true,
   "code-runner.ignoreSelection": true,
+  "html.format.enable": false,
+  "window.zoomLevel": 0,
+  "scss.lint.unknownProperties": "ignore",
 
   "editor.scrollBeyondLastLine": false,
   "editor.multiCursorModifier": "ctrlCmd",
   "editor.formatOnSave": true,
+  "editor.snippetSuggestions": "top",
 
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
