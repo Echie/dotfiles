@@ -92,11 +92,9 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias zshc="nano ~/.zshrc"
 alias d='docker'
-alias g='grep'
 
 alias docker_cleancont='docker ps -a -q | xargs docker rm'
 alias docker_cleanimg='docker images --filter "dangling=true" -q | xargs docker rmi'
-alias check_rstudio='gcloud compute ssh rstudio-server --project="dagmar-advanced-analytics" --command="docker stats rstudio-server"'
 
 dshell() {
     docker exec -it "$1" bash
