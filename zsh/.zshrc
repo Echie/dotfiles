@@ -3,7 +3,7 @@
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/teemu.huovinen/.oh-my-zsh
+export ZSH=/Users/teemu/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -90,8 +90,9 @@ source $ZSH/oh-my-zsh.sh
 #
 # Example aliases
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias zshc="nano ~/.zshrc"
+alias zshc="code ~/.zshrc"
 alias d='docker'
+alias dc='docker-compose'
 
 alias docker_cleancont='docker ps -a -q | xargs docker rm'
 alias docker_cleanimg='docker images --filter "dangling=true" -q | xargs docker rmi'
@@ -100,7 +101,15 @@ dshell() {
     docker exec -it "$1" bash
 }
 
+dcshell() {
+    docker-compose exec "$1" bash
+}
+
+git_delete_branch() {
+    git push origin ":$1" && git branch -D "$1"
+}
+
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 zstyle ':completion:*' special-dirs true
 
-[ -s "/Users/teemu.huovinen/.scm_breeze/scm_breeze.sh" ] && source "/Users/teemu.huovinen/.scm_breeze/scm_breeze.sh"
+[ -s "/Users/teemu/.scm_breeze/scm_breeze.sh" ] && source "/Users/teemu/.scm_breeze/scm_breeze.sh"

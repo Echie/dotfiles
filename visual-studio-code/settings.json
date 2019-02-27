@@ -1,66 +1,82 @@
 {
+  // Editor
+  "editor.scrollBeyondLastLine": false,
+  "editor.multiCursorModifier": "ctrlCmd",
+  "editor.formatOnSave": false,
+  "editor.snippetSuggestions": "top",
+  "editor.fontSize": 12,
+  "editor.fontFamily": "Fira Code, monospace",
+  "editor.fontWeight": "500",
+  "editor.fontLigatures": true,
   // Terminal
   "terminal.external.osxExec": "iTerm.app",
   "terminal.integrated.cursorStyle": "line",
-  "terminal.integrated.shell.osx": "/bin/zsh",
-  "docker.attachShellCommand.linuxContainer": "/bin/bash",
-
+  "terminal.integrated.shell.osx": "/usr/local/bin/zsh",
   // Theme and icons
-  "workbench.colorTheme": "One Dark Pro",
   "workbench.iconTheme": "vscode-icons",
   "workbench.colorCustomizations": {
-    "editorIndentGuide.activeBackground": "#646363"
+      "editorIndentGuide.activeBackground": "#646363"
   },
-
   // Git
   "git.autofetch": true,
   "gitlens.codeLens.enabled": false,
   "gitlens.currentLine.enabled": false,
-  "gitlens.historyExplorer.enabled": true,
+  "gitlens.hovers.currentLine.over": "line",
+  "gitlens.hovers.enabled": false,
+  "gitlens.views.repositories.location": "scm",
+  "gitlens.views.fileHistory.enabled": true,
+  "gitlens.views.lineHistory.enabled": true,
   "gitlens.advanced.messages": {
-    "suppressShowKeyBindingsNotice": true
+      "suppressShowKeyBindingsNotice": true
   },
-
+  // PHP
+  "php.suggest.basic": false,
   // Python
-  "python.pythonPath": "/usr/local/bin/python3",
   "python.formatting.provider": "yapf",
-  "python.venvFolders": ["venv"],
+  "python.venvFolders": [
+      "venv"
+  ],
+  "python.pythonPath": "${workspaceFolder}/venv/bin/python",
   "python.venvPath": "${workspaceRoot}",
+  "python.linting.pylintArgs": [
+      "--disable=R,C,W",
+      "--load-plugins=pylint_django"
+  ],
+  // "python.pythonPath": "/usr/local/bin/python3",
   // "python.autoComplete.preloadModules": ["numpy", "pandas", "psycopg2"],
-  // "python.linting.pylintArgs": [
-  //   "--disable=R,C,W0702,W0703",
-  //   "--load-plugins=pylint_django"
-  // ],
   // "python.autoComplete.extraPaths": [
   //     "${workspaceRoot}/venv/lib/python3.6/site-packages"
   // ],
-
   // Miscellaneous
+  "yaml.format.enable": true,
+  "workbench.editor.highlightModifiedTabs": true,
   "atomKeymap.promptV3Features": true,
   "explorer.confirmDragAndDrop": false,
   "breadcrumbs.enabled": true,
   "search.smartCase": true,
   "problems.decorations.enabled": false,
-  "code-runner.saveFileBeforeRun": true,
-  "code-runner.ignoreSelection": true,
-  "html.format.enable": false,
   "window.zoomLevel": 0,
   "scss.lint.unknownProperties": "ignore",
-
-  "editor.scrollBeyondLastLine": false,
-  "editor.multiCursorModifier": "ctrlCmd",
-  "editor.formatOnSave": true,
-  "editor.snippetSuggestions": "top",
-
-  "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
   "files.exclude": {
-    "**/.git": true,
-    "**/.svn": true,
-    "**/.hg": true,
-    "**/CVS": true,
-    "**/.DS_Store": true,
-    "node_modules": true,
-    ".ipynb_checkpoints": true
+      "**/.git": true,
+      "**/.svn": true,
+      "**/.hg": true,
+      "**/CVS": true,
+      "**/.DS_Store": true,
+      "node_modules": true,
+      ".ipynb_checkpoints": true
+  },
+  "go.formatTool": "gofmt",
+  "go.formatFlags": [
+      "-s"
+  ],
+  "files.associations": {
+      "*.html": "html",
+      "*.txt": "plaintext",
+      "**/templates/*.html": "django-html",
+      "**/templates/*": "django-txt",
+      "**/requirements{/**,*}.{txt,in}": "pip-requirements",
+
   }
 }
