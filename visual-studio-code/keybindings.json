@@ -1,10 +1,10 @@
 [
   {
-    "key": "cmd+[IntlBackslash]",
+    "key": "cmd+shift+[IntlBackslash]",
     "command": "workbench.action.terminal.focus"
   },
   {
-    "key": "cmd+[IntlBackslash]",
+    "key": "cmd+shift+[IntlBackslash]",
     "command": "workbench.action.focusActiveEditorGroup",
     "when": "terminalFocus"
   },
@@ -33,7 +33,7 @@
     "when": "editorTextFocus"
   },
   {
-    "key": "cmd+shift+e",
+    "key": "cmd+[IntlBackslash]",
     "command": "workbench.action.toggleSidebarVisibility"
   }
 ]
