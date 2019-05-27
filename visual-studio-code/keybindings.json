@@ -31,5 +31,9 @@
     "key": "ctrl+shift+left",
     "command": "editor.action.smartSelect.shrink",
     "when": "editorTextFocus"
+  },
+  {
+    "key": "cmd+shift+e",
+    "command": "workbench.action.toggleSidebarVisibility"
   }
 ]
