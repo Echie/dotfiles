@@ -59,7 +59,13 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions)
+plugins=(
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+    git
+    docker
+    docker-compose
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -106,10 +112,9 @@ dcshell() {
 }
 
 git_delete_branch() {
-    git push origin ":$1" && git branch -D "$1"
+    git branch -D "$1" && git push origin ":$1"
 }
 
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 zstyle ':completion:*' special-dirs true
 
 [ -s "/Users/teemu/.scm_breeze/scm_breeze.sh" ] && source "/Users/teemu/.scm_breeze/scm_breeze.sh"
