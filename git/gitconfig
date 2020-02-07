@@ -6,6 +6,9 @@
 	default = simple
 
 [core]
-	editor = nano
+	editor = code --wait
 	autocrlf = input
 	excludesfile =  ~/.gitignore_global
+
+[pull]
+	rebase = true

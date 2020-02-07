@@ -28,3 +28,5 @@ tmp
 *.ipynb
 *.pyc
 .ipynb_checkpoints
+
+node_modules
