@@ -27,7 +27,7 @@ main() {
     # Configure spectacle
     configure_spectacle
     # Install global python packages
-    pip_packages=(virtualenv pylint yapf)
+    pip_packages=(virtualenv)
     pip3_install "${pip_packages[@]}"
     # Configuring iTerm2
     configure_iterm2
