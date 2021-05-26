@@ -12,3 +12,6 @@
 
 [pull]
 	rebase = true
+
+[alias]
+	pr = "!open \"https://$(git remote get-url origin | gawk '!/^[^:]+?:\\/\\// { match($0, /^([^@]+)@([^:]+):(.+)\\.git$/, arr); printf(\"%s/%s\\n\", arr[2],arr[3]) } ; /^[^:]+?:\\/\\// { match($0, /^.+:\\/\\/(.+:)?(.+)\\.git$/, arr); printf(\"%s\\n\", arr[2]) }')/compare/$(git branch-name)?expand=1\""
