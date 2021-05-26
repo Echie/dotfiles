@@ -34,7 +34,7 @@ main() {
     # Update /etc/hosts (Currently disabled)
     # update_hosts_file
     # Setting up macOS defaults
-    setup_macOS_defaults
+    # setup_macOS_defaults
     # Updating login items
     update_login_items
 }
