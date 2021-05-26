@@ -2,6 +2,25 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
+export PATH="/usr/local/Cellar/gettext/0.20.1/bin:$PATH"
+export PATH="/usr/local/Cellar/postgresql@11/11.7/bin:$PATH"
+
+# If you need to have openjdk first in your PATH run:
+export PATH="/usr/local/opt/openjdk/bin:$PATH"
+
+# export JAVA_8_HOME=$(/usr/libexec/java_home -v1.8)
+# export JAVA_11_HOME=$(/usr/libexec/java_home -v11)
+
+# alias java8='export JAVA_HOME=$JAVA_8_HOME'
+# alias java11='export JAVA_HOME=$JAVA_11_HOME'
+
+# Default to Java 11
+# java11
+
+
+# For compilers to find openjdk you may need to set:
+# export CPPFLAGS="-I/usr/local/opt/openjdk/include"
+
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/teemu/.oh-my-zsh
 
@@ -63,6 +82,7 @@ plugins=(
     zsh-autosuggestions
     zsh-syntax-highlighting
     git
+    kubectl
     docker
     docker-compose
 )
@@ -103,6 +123,10 @@ alias dc='docker-compose'
 alias docker_cleancont='docker ps -a -q | xargs docker rm'
 alias docker_cleanimg='docker images --filter "dangling=true" -q | xargs docker rmi'
 
+alias auth_oma='gcloud config set account teemu1huovinen@gmail.com && gcloud config set project echie-prod && gcloud container clusters get-credentials cluster-1 --region europe-north1-a'
+alias auth_swappie_prod='gcloud config set account teemu@swappie.com && gcloud config set project swappie-prod && gcloud container clusters get-credentials cluster-2 --region europe-west3'
+alias auth_swappie_staging='gcloud config set account teemu@swappie.com && gcloud config set project swappie-staging && gcloud container clusters get-credentials cluster-3 --region europe-west3'
+
 dshell() {
     docker exec -it "$1" bash
 }
@@ -118,3 +142,17 @@ git_delete_branch() {
 zstyle ':completion:*' special-dirs true
 
 [ -s "/Users/teemu/.scm_breeze/scm_breeze.sh" ] && source "/Users/teemu/.scm_breeze/scm_breeze.sh"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc' ]; then source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc' ]; then source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'; fi
+
+export GOPATH="${HOME}/.go"
+export GOROOT="/usr/local/opt/go/libexec"
+export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+
+zle_highlight=('paste:none')
+
+eval "$(nodenv init -)"
