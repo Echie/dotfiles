@@ -19,6 +19,16 @@
     "when": "editorTextFocus"
   },
   {
+    "key": "shift+cmd+[Period]",
+    "command": "problems.action.showQuickFixes",
+    "when": "problemFocus"
+  },
+  {
+    "key": "shift+cmd+[Period]",
+    "command": "editor.action.quickFix",
+    "when": "editorHasCodeActionsProvider && editorTextFocus && !editorReadonly"
+  },
+  {
     "key": "shift+cmd+g",
     "command": "workbench.view.scm"
   },
@@ -35,5 +45,13 @@
   {
     "key": "cmd+[IntlBackslash]",
     "command": "workbench.action.toggleSidebarVisibility"
+  },
+  {
+    "key": "cmd+k f",
+    "command": "editor.action.codeAction",
+    "args": {
+      "kind": "source.fixAll.tslint",
+      "apply": "first"
+    }
   }
 ]
