@@ -3,7 +3,7 @@
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
 export PATH="/usr/local/Cellar/gettext/0.20.1/bin:$PATH"
-export PATH="/usr/local/Cellar/postgresql@11/11.7/bin:$PATH"
+export PATH="/usr/local/opt/postgresql@11/bin:$PATH"
 
 # If you need to have openjdk first in your PATH run:
 export PATH="/usr/local/opt/openjdk/bin:$PATH"
