@@ -1,0 +1,19 @@
+# close / restore tab
+unmap x
+unmap X
+
+# reload
+unmap r
+
+# create new tab
+unmap t
+
+# backward / forward in history
+unmap H
+unmap L
+
+# insert mode
+unmap i
+
+# help dialog
+unmap ?
